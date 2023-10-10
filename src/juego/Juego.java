@@ -108,7 +108,6 @@ public class Juego extends InterfaceJuego {
 		dibujarManzanas(manzanitas);
 		perrito.dibujarse(this.entorno);
 		
-		
 		entorno.cambiarFont("Arial", 18, Color.white);
 		
 		entorno.escribirTexto("posicion en x:" + perrito.x, 600, 50);
