@@ -90,21 +90,18 @@ public class Juego extends InterfaceJuego {
 		// ...
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA) && colisionMultiple(manzanitas,perrito)!=1 ) {
 			perrito.mover(1);
-
 		}
+		
 		if (entorno.estaPresionada(entorno.TECLA_ARRIBA) && colisionMultiple(manzanitas,perrito)!=0) {
 			perrito.mover(0);
-
 		}	
 		
 		if (entorno.estaPresionada(entorno.TECLA_ABAJO) && colisionMultiple(manzanitas,perrito)!=2) {
 			perrito.mover(2);
-
 		}
 		
 		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && colisionMultiple(manzanitas,perrito)!=3) {
 			perrito.mover(3);
-
 		}
 		
 		
