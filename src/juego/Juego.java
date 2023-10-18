@@ -50,23 +50,23 @@ public class Juego extends InterfaceJuego {
 		
 	}
 	public int colision (Manzana m, Perro a) {
-		double zona1 = m.x-(m.ancho/2);
-		double zona3 = m.x+(m.ancho/2);
-		double zona2 = m.y-(m.alto/2);
-		double zona0 = m.y+(m.alto/2);
+		double zona1 = m.x-(m.ancho/2); //zona izquieda manzana
+		double zona3 = m.x+(m.ancho/2); //zona derecha manzana
+		double zona2 = m.y-(m.alto/2); //zona arriba manzana
+		double zona0 = m.y+(m.alto/2);  //zona abajo manzana
 		
 		
-		if(a.y > zona2 && a.y < zona0 && a.x>zona1-60 && a.x<zona3) {
+		if(a.y > zona2 && a.y < zona0 && a.x>zona1-24 && a.x<zona3) {
 			return 1;
 		}
 		
-		if(a.x > zona1 && a.x < zona3 && a.y>zona2-60 && a.y<zona0) {
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2-24 && a.y<zona0) {
 			return 2;
 		}
-		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0+60) {
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0+24) {
 			return 0;
 		}
-		if(a.x > zona1 && a.x < zona3+60 && a.y>zona2 && a.y<zona0) {
+		if(a.x > zona1 && a.x < zona3+24 && a.y>zona2 && a.y<zona0) {
 			return 3;
 		}
 		return 5;

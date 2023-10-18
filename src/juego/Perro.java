@@ -21,13 +21,13 @@ public class Perro {
 		this.img = new Image[4];
 		
 		for (int i=0; i < img.length ; i++) {
-			img[i] = Herramientas.cargarImagen("perro"+i+".png");	
+			img[i] = Herramientas.cargarImagen("perrito"+i+".png");	
 		}
 	}
 	
 	public void dibujarse(Entorno entorno)
 	{
-		entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.38);
+		entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.7);
 	}
 	
 	
@@ -37,19 +37,19 @@ public class Perro {
 		
 		if (direccion ==0)
 		{
-			y--;	
+			y-=2;	
 		}
 		if (direccion ==1)
 		{
-			x++;	
+			x+=2;	
 		}
 		if (direccion ==2)
 		{
-			y++;	
+			y+=2;	
 		}
 		if (direccion ==3)
 		{
-			x--;	
+			x-=2;	
 		}
 		
 		if (this.x>850) {
