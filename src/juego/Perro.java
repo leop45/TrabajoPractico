@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import entorno.Entorno;
 import entorno.Herramientas;
+import juego.Rayo;
 
 public class Perro {
 	// Variables de instancia
@@ -11,6 +12,7 @@ public class Perro {
 	double y;
 	int direccion;
 	Image[] img;
+	Image rayo;
 
 	
 	//constructor
@@ -23,6 +25,8 @@ public class Perro {
 		for (int i=0; i < img.length ; i++) {
 			img[i] = Herramientas.cargarImagen("perrito"+i+".png");	
 		}
+
+		this.rayo = Herramientas.cargarImagen("rayo.png");
 	}
 	
 	public void dibujarse(Entorno entorno)
@@ -52,17 +56,17 @@ public class Perro {
 			x-=2;	
 		}
 		
-		if (this.x>850) {
-			x=-50;
+		if (this.x>774) {
+			x=774;
 		}
-		if (this.x<-50) {
-			x=850;
+		if (this.x<24) {
+			x=24;
 		}
-		if(this.y>650) {
-			y=-50;
+		if(this.y>582) {
+			y=582;
 		}
-		if(this.y<-50) {
-			y=650;
+		if(this.y<28) {
+			y=28;
 		}
 	}
 }

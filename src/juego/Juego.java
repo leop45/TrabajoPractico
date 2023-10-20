@@ -13,6 +13,7 @@ public class Juego extends InterfaceJuego {
 	
 	Perro perrito;
 	Manzana[] manzanitas;
+	Rayo rayo;
 	
 	public Juego() {
 		// Inicializa el objeto entorno
@@ -20,7 +21,8 @@ public class Juego extends InterfaceJuego {
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
-		perrito=new Perro(200,100);
+		perrito=new Perro(400,570);
+		rayo = new Rayo (perrito.x, perrito.y);
 		manzanitas = new Manzana [9];
 		int posXManzana= 100;
 		int posYManzana= 100;
@@ -79,6 +81,11 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 
+	public void dispararRayo() {
+		rayo.dibujarse(this.entorno);
+		
+	}
+
 	/**
 	 * Durante el juego, el método tick() será ejecutado en cada instante y 
 	 * por lo tanto es el método más importante de esta clase. Aquí se debe 
@@ -88,22 +95,30 @@ public class Juego extends InterfaceJuego {
 	public void tick() {
 		// Procesamiento de un instante de tiempo
 		// ...
+		
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA) && colisionMultiple(manzanitas,perrito)!=1 ) {
 			perrito.mover(1);
 		}
 		
-		if (entorno.estaPresionada(entorno.TECLA_ARRIBA) && colisionMultiple(manzanitas,perrito)!=0) {
+		else if (entorno.estaPresionada(entorno.TECLA_ARRIBA) && colisionMultiple(manzanitas,perrito)!=0) {
 			perrito.mover(0);
 		}	
 		
-		if (entorno.estaPresionada(entorno.TECLA_ABAJO) && colisionMultiple(manzanitas,perrito)!=2) {
+		else if (entorno.estaPresionada(entorno.TECLA_ABAJO) && colisionMultiple(manzanitas,perrito)!=2) {
 			perrito.mover(2);
 		}
 		
-		if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && colisionMultiple(manzanitas,perrito)!=3) {
+		else if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA) && colisionMultiple(manzanitas,perrito)!=3) {
 			perrito.mover(3);
 		}
 		
+		if (entorno.estaPresionada(entorno.TECLA_ESPACIO)) {
+			dispararRayo();
+			rayo.mover(perrito.direccion);
+		}else{
+			rayo.x = perrito.x;
+			rayo.y = perrito.y;
+		}
 		
 		dibujarManzanas(manzanitas);
 		perrito.dibujarse(this.entorno);
