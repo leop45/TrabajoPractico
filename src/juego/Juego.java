@@ -125,6 +125,7 @@ public class Juego extends InterfaceJuego {
 		
 		entorno.cambiarFont("Arial", 18, Color.white);
 		
+		entorno.escribirTexto("Puntos:",600, 30);
 		entorno.escribirTexto("posicion en x:" + perrito.x, 600, 50);
 		entorno.escribirTexto("posicion en y:" + perrito.y, 600, 100);
 		
