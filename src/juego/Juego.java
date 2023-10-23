@@ -23,7 +23,7 @@ public class Juego extends InterfaceJuego {
 		// ...
 		perrito=new Perro(400,570);
 		rayo = new Rayo (perrito.x, perrito.y);
-		manzanitas = new Manzana [9];
+		manzanitas = new Manzana [6];
 		int posXManzana= 100;
 		int posYManzana= 100;
 		for(int i = 0; i<manzanitas.length; i++) {
@@ -33,7 +33,7 @@ public class Juego extends InterfaceJuego {
 			}
 			if(posXManzana > entorno.ancho()-100) {
 				posXManzana = 100;
-				posYManzana += 200;
+				posYManzana += 330;
 			}
 			
 		}
