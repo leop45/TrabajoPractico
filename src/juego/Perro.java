@@ -4,7 +4,6 @@ import java.awt.Image;
 
 import entorno.Entorno;
 import entorno.Herramientas;
-import juego.Rayo;
 
 public class Perro {
 	// Variables de instancia

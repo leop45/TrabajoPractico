@@ -13,7 +13,6 @@ public class Juego extends InterfaceJuego {
 	
 	Perro perrito;
 	Manzana[] manzanitas;
-	Rayo rayo;
 	
 	public Juego() {
 		// Inicializa el objeto entorno
@@ -22,7 +21,6 @@ public class Juego extends InterfaceJuego {
 		// Inicializar lo que haga falta para el juego
 		// ...
 		perrito=new Perro(400,570);
-		rayo = new Rayo (perrito.x, perrito.y);
 		manzanitas = new Manzana [9];
 		int posXManzana= 100;
 		int posYManzana= 100;
@@ -81,10 +79,6 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 
-	public void dispararRayo() {
-		rayo.dibujarse(this.entorno);
-		
-	}
 
 	/**
 	 * Durante el juego, el método tick() será ejecutado en cada instante y 
@@ -112,13 +106,6 @@ public class Juego extends InterfaceJuego {
 			perrito.mover(3);
 		}
 		
-		if (entorno.estaPresionada(entorno.TECLA_ESPACIO)) {
-			dispararRayo();
-			rayo.mover(perrito.direccion);
-		}else{
-			rayo.x = perrito.x;
-			rayo.y = perrito.y;
-		}
 		
 		dibujarManzanas(manzanitas);
 		perrito.dibujarse(this.entorno);
