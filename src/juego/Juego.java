@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Color;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
@@ -13,7 +12,7 @@ public class Juego extends InterfaceJuego {
 	
 	Perro perrito;
 	Manzana[] manzanitas;
-	Rayo rayo;
+	Rayo rayito;
 	
 	public Juego() {
 		// Inicializa el objeto entorno
@@ -22,7 +21,7 @@ public class Juego extends InterfaceJuego {
 		// Inicializar lo que haga falta para el juego
 		// ...
 		perrito=new Perro(400,570);
-		rayo = new Rayo (perrito.x, perrito.y);
+		rayito = new Rayo (perrito.x, perrito.y);
 		manzanitas = new Manzana [6];
 		int posXManzana= 100;
 		int posYManzana= 100;
@@ -51,6 +50,7 @@ public class Juego extends InterfaceJuego {
 		return 5;
 		
 	}
+
 	public int colision (Manzana m, Perro a) {
 		double zona1 = m.x-(m.ancho/2); //zona izquieda manzana
 		double zona3 = m.x+(m.ancho/2); //zona derecha manzana
@@ -81,10 +81,10 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 
-	public void dispararRayo() {
-		rayo.dibujarse(this.entorno);
-		
-	}
+
+	// public void dibujarRayo() {
+	// 	rayo.dibujarse(this.entorno);
+	// }
 
 	/**
 	 * Durante el juego, el método tick() será ejecutado en cada instante y 
@@ -112,13 +112,13 @@ public class Juego extends InterfaceJuego {
 			perrito.mover(3);
 		}
 		
-		if (entorno.estaPresionada(entorno.TECLA_ESPACIO)) {
-			dispararRayo();
-			rayo.mover(perrito.direccion);
-		}else{
-			rayo.x = perrito.x;
-			rayo.y = perrito.y;
+		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
+			rayito.actualizar(perrito.x, perrito.y);
+			rayito.disparar();
 		}
+
+		rayito.dibujar(entorno);
+		rayito.mover(perrito.direccion);
 		
 		dibujarManzanas(manzanitas);
 		perrito.dibujarse(this.entorno);
