@@ -16,7 +16,7 @@ public class Manzana {
 	
 	
 	public Manzana(double x, double y) {
-		this.escala=0.3;
+		this.escala=0.4;
 		this.x = x;
 		this.y = y;
 		
