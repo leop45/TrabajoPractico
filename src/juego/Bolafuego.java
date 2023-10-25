@@ -5,25 +5,25 @@ import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
 
-public class Planta {
+public class Bolafuego {
     double x;
     double y;
     int direccion;
     Image[] img;
 
-    public Planta(double x, double y){
+    public Bolafuego(double x, double y){
         this.x = x;
         this.y = y;
         this.direccion = 0;
         this.img = new Image[4];
 
         for (int i=0; i < img.length ; i++) {
-            img[i] = Herramientas.cargarImagen("planta"+i+".png");
+            img[i] = Herramientas.cargarImagen("bolaFuego"+i+".png");
     }
  }
  public void dibujarse(Entorno entorno)
  {
-     entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.3);
+     entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.08);
  }
  public void mover(int d)
     {
@@ -31,19 +31,19 @@ public class Planta {
 
         if (direccion ==0)
         {
-            y-=0.7;
+            y-=3;
         }
         if (direccion ==1)
         {
-            x+=0.7;
+            x+=3;
         }
         if (direccion ==2)
         {
-            y+=0.7;
+            y+=3;
         }
         if (direccion ==3)
         {
-            x-=0.7;
+            x-=3;
         }
 
         if (this.x>745) {
