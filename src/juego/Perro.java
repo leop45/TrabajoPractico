@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Image;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -11,8 +10,6 @@ public class Perro {
 	double y;
 	int direccion;
 	Image[] img;
-	Image rayo;
-
 	
 	//constructor
 	public Perro(double x, double y) {
@@ -25,14 +22,13 @@ public class Perro {
 			img[i] = Herramientas.cargarImagen("perrito"+i+".png");	
 		}
 
-		this.rayo = Herramientas.cargarImagen("rayo.png");
+
 	}
 	
 	public void dibujarse(Entorno entorno)
 	{
 		entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.7);
 	}
-	
 	
 	public void mover(int d)
 	{
@@ -55,8 +51,8 @@ public class Perro {
 			x-=2;	
 		}
 		
-		if (this.x>774) {
-			x=774;
+		if (this.x>825) {
+			x=825;
 		}
 		if (this.x<24) {
 			x=24;
@@ -67,5 +63,10 @@ public class Perro {
 		if(this.y<28) {
 			y=28;
 		}
+	}
+
+	public void disparar(Perro perrito, Rayo rayito) {
+		rayito.actualizar(perrito);
+		rayito.disparando();
 	}
 }
