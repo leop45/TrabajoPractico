@@ -23,7 +23,7 @@ public class Planta {
  }
  public void dibujarse(Entorno entorno)
  {
-     entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.3);
+     entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.2);
  }
  public void mover(int d)
     {
@@ -46,8 +46,8 @@ public class Planta {
             x-=0.7;
         }
 
-        if (this.x>745) {
-            x=745;
+        if (this.x>810) {
+            x=810;
         }
         if (this.x<53) {
             x=53;

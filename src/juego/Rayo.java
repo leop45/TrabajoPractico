@@ -31,23 +31,23 @@ public class Rayo {
 		}
 	}
 
-	public void mover(int direccion){
-		if (disparando){
-			if (direccion == 0) {
+	public void mover(){
+		if (this.disparando){
+			if (this.direccion == 0) {
                 // Mover el rayo hacia arriba
                 y -= 2;
-            } else if (direccion == 1) {
+            } else if (this.direccion == 1) {
                 // Mover el rayo hacia la derecha
                 x += 2;
-            } else if (direccion == 2) {
+            } else if (this.direccion == 2) {
                 // Mover el rayo hacia abajo
                 y += 2;
-            } else if (direccion == 3) {
+            } else if (this.direccion == 3) {
                 // Mover el rayo hacia la izquierda
                 x -= 2;
             }
 
-			if (this.x>774) {
+			if (this.x>829) {
 				disparando = false;
 			}
 			if (this.x<24) {
@@ -56,14 +56,16 @@ public class Rayo {
 			if(this.y>582) {
 				disparando = false;
 			}
-			if(this.y<28) {
+			if(this.y<16) {
 				disparando = false;
 			}
 		}
 	}
 
-	public void actualizar(double newX, double newY){
-		this.x = newX;
-		this.y = newY;
+	public void actualizar(Perro perrito){
+		this.x = perrito.x;
+		this.y = perrito.y;
+		this.direccion = perrito.direccion;
 	}
+	
 }

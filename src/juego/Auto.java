@@ -27,7 +27,7 @@ public class Auto {
 	
 	public void dibujarse(Entorno entorno)
 	{
-		entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.2);
+		entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.14);
 	}
 	
 	
@@ -41,7 +41,7 @@ public class Auto {
 		}
 		if (direccion ==1)
 		{
-			x++;	
+			x+=2;	
 		}
 		if (direccion ==2)
 		{
@@ -49,14 +49,14 @@ public class Auto {
 		}
 		if (direccion ==3)
 		{
-			x--;	
+			x+=2;	
 		}
 		
-		if (this.x>850) {
-			x=-50;
+		if (this.x>790) {
+			x=790;
 		}
-		if (this.x<-50) {
-			x=850;
+		if (this.x<48) {
+			x=48;
 		}
 		if(this.y>650) {
 			y=-50;

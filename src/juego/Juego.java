@@ -16,29 +16,31 @@ public class Juego extends InterfaceJuego {
 	Planta plantita;
     Planta plantita2;
     Bolafuego fueguito;
+	Auto autito;
 	
 	public Juego() {
 		// Inicializa el objeto entorno
-		this.entorno = new Entorno(this, "Prueba del Entorno", 800, 600);
+		this.entorno = new Entorno(this, "Prueba del Entorno", 850, 600);
 		
 		// Inicializar lo que haga falta para el juego
 		// ...
-		perrito=new Perro(400,570);
+		perrito=new Perro(424,570);
 		rayito = new Rayo (perrito.x, perrito.y);
 		manzanitas = new Manzana [6];
-		plantita = new Planta(550, 390);
-        plantita2 = new Planta(250, 190);
-        fueguito = new Bolafuego(400, 390);
+		plantita = new Planta(550, 33);
+        plantita2 = new Planta(250, 272);
+        fueguito = new Bolafuego(400, 33);
+		autito = new Auto(116, 518);
 		int posXManzana= 100;
-		int posYManzana= 100;
+		int posYManzana= 128;
 		for(int i = 0; i<manzanitas.length; i++) {
-			manzanitas[i] = new Manzana(posXManzana,posYManzana);
+			manzanitas[i] = new Manzana(posXManzana+75,posYManzana+50);
 			if(posXManzana <= entorno.ancho()-100) {
-				posXManzana += 300;
+				posXManzana += 250;
 			}
 			if(posXManzana > entorno.ancho()-100) {
 				posXManzana = 100;
-				posYManzana += 330;
+				posYManzana += 245;
 			}
 			
 		}
@@ -89,6 +91,7 @@ public class Juego extends InterfaceJuego {
 
 	int mov=1;
     int mov2=3;
+	//int movAuto=3;
 
 	// public void dibujarRayo() {
 	// 	rayo.dibujarse(this.entorno);
@@ -104,7 +107,10 @@ public class Juego extends InterfaceJuego {
 	public void tick() {
 		// Procesamiento de un instante de tiempo
 		// ...
-		
+		// autito.mover(movAuto);
+		// if(autito.x==790){
+        //     movAuto=3;
+		// }
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA) && colisionMultiple(manzanitas,perrito)!=1 ) {
 			perrito.mover(1);
 		}
@@ -121,20 +127,13 @@ public class Juego extends InterfaceJuego {
 			perrito.mover(3);
 		}
 		
-		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
-			rayito.actualizar(perrito.x, perrito.y);
-			rayito.disparar();
-		}
 
 		plantita.mover(mov);
-        if (plantita.x<=400){
-            fueguito.dibujarse(this.entorno);
-            fueguito.mover(3);
-            if(fueguito.x==53){
-
-            }
-        }
-        if(plantita.x==745){
+        // if (plantita.x<=400){
+        //     fueguito.dibujarse(this.entorno);
+        //     fueguito.mover(3);
+        // }
+        if(plantita.x==810){
             mov=3;
             plantita.mover(mov);
         }
@@ -148,18 +147,27 @@ public class Juego extends InterfaceJuego {
             mov2=1;
             plantita2.mover(mov2);
         }
-        if(plantita2.x==745){
+        if(plantita2.x==810){
             mov2=3;
             plantita2.mover(mov2);
         }
 
+
+
+		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
+			rayito.actualizar(perrito);
+			rayito.disparar();
+		}
+
+
 		rayito.dibujar(entorno);
-		rayito.mover(perrito.direccion);
+		rayito.mover();
 		
 		dibujarManzanas(manzanitas);
 		perrito.dibujarse(this.entorno);
 		plantita.dibujarse(this.entorno);
 		plantita2.dibujarse(this.entorno);
+		// autito.dibujarse(this.entorno);
 		
 		entorno.cambiarFont("Arial", 18, Color.white);
 		entorno.escribirTexto("Puntos:",600, 30);

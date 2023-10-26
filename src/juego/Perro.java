@@ -49,8 +49,8 @@ public class Perro {
 			x-=2;	
 		}
 		
-		if (this.x>774) {
-			x=774;
+		if (this.x>825) {
+			x=825;
 		}
 		if (this.x<24) {
 			x=24;
