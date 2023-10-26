@@ -21,6 +21,8 @@ public class Perro {
 		for (int i=0; i < img.length ; i++) {
 			img[i] = Herramientas.cargarImagen("perrito"+i+".png");	
 		}
+
+
 	}
 	
 	public void dibujarse(Entorno entorno)
@@ -61,5 +63,10 @@ public class Perro {
 		if(this.y<28) {
 			y=28;
 		}
+	}
+
+	public void disparar(Perro perrito, Rayo rayito) {
+		rayito.actualizar(perrito);
+		rayito.disparando();
 	}
 }

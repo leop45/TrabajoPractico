@@ -10,7 +10,8 @@ public class Rayo {
 	double y;
     int direccion;
 	Image rayoImg;
-	boolean disparando;
+	// boolean disparando;
+	String disparando;
     	
     //constructor
 	public Rayo(double x, double y) {
@@ -18,46 +19,46 @@ public class Rayo {
 		this.y = y;
         this.direccion = 0;
 		this.rayoImg = Herramientas.cargarImagen("rayo.png");
-		this.disparando = false;
+		this.disparando = null;
 	}
 
-	public void disparar() {
-        disparando = true;
+	public void disparando() {
+        disparando = "1";
     }
 
 	public void dibujar(Entorno entorno){
-		if (disparando){
+		if (disparando == "1"){
 			entorno.dibujarImagen(rayoImg, this.x, this.y, 0, 0.1);
 		}
 	}
 
 	public void mover(){
-		if (this.disparando){
+		if (this.disparando == "1"){
 			if (this.direccion == 0) {
                 // Mover el rayo hacia arriba
-                y -= 2;
+                y -= 4.5;
             } else if (this.direccion == 1) {
                 // Mover el rayo hacia la derecha
-                x += 2;
+                x += 4.5;
             } else if (this.direccion == 2) {
                 // Mover el rayo hacia abajo
-                y += 2;
+                y += 4.5;
             } else if (this.direccion == 3) {
                 // Mover el rayo hacia la izquierda
-                x -= 2;
+                x -= 4.5;
             }
 
 			if (this.x>829) {
-				disparando = false;
+				disparando = null;
 			}
 			if (this.x<24) {
-				disparando = false;
+				disparando = null;
 			}
 			if(this.y>582) {
-				disparando = false;
+				disparando = null;
 			}
 			if(this.y<16) {
-				disparando = false;
+				disparando = null;
 			}
 		}
 	}

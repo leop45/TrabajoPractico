@@ -56,7 +56,6 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 		return 5;
-		
 	}
 
 	public int colision (Manzana m, Perro a) {
@@ -64,7 +63,6 @@ public class Juego extends InterfaceJuego {
 		double zona3 = m.x+(m.ancho/2); //zona derecha manzana
 		double zona2 = m.y-(m.alto/2); //zona arriba manzana
 		double zona0 = m.y+(m.alto/2);  //zona abajo manzana
-		
 		
 		if(a.y > zona2 && a.y < zona0 && a.x>zona1-24 && a.x<zona3) {
 			return 1;
@@ -80,7 +78,6 @@ public class Juego extends InterfaceJuego {
 			return 3;
 		}
 		return 5;
-		
 	}
 	
 	public void dibujarManzanas(Manzana[] manzanas) {
@@ -152,23 +149,24 @@ public class Juego extends InterfaceJuego {
             plantita2.mover(mov2);
         }
 
-
-
 		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
-			rayito.actualizar(perrito);
-			rayito.disparar();
+			perrito.disparar(perrito, rayito);
 		}
+		
 
 
-		rayito.dibujar(entorno);
-		rayito.mover();
 		
 		dibujarManzanas(manzanitas);
+		rayito.dibujar(entorno);
+		rayito.mover();
 		perrito.dibujarse(this.entorno);
 		plantita.dibujarse(this.entorno);
 		plantita2.dibujarse(this.entorno);
 		// autito.dibujarse(this.entorno);
 		
+
+
+
 		entorno.cambiarFont("Arial", 18, Color.white);
 		entorno.escribirTexto("Puntos:",600, 30);
 		entorno.escribirTexto("posicion en x:" + perrito.x, 600, 50);
