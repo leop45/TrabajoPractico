@@ -41,7 +41,6 @@ public class Juego extends InterfaceJuego {
 			if(posXManzana > entorno.ancho()-100) {
 				posXManzana = 100;
 				posYManzana += 245;
-				posYManzana += 330;
 			}
 			
 		}
