@@ -17,6 +17,7 @@ public class Juego extends InterfaceJuego {
     Planta plantita2;
     Bolafuego fueguito;
 	Auto autito;
+	// Rayo[] rayitos;
 	
 	public Juego() {
 		// Inicializa el objeto entorno
@@ -27,6 +28,7 @@ public class Juego extends InterfaceJuego {
 		perrito=new Perro(424,570);
 		rayito = new Rayo (perrito.x, perrito.y);
 		manzanitas = new Manzana [6];
+		// rayitos = new Rayo[45];
 		plantita = new Planta(550, 33);
         plantita2 = new Planta(250, 272);
         fueguito = new Bolafuego(400, 33);
@@ -42,8 +44,11 @@ public class Juego extends InterfaceJuego {
 				posXManzana = 100;
 				posYManzana += 245;
 			}
-			
 		}
+
+		// for (int i = 0; i < rayitos.length; i++){
+		// 	rayitos[i] = new Rayo(perrito.x, perrito.y);
+		// }
 
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -83,6 +88,12 @@ public class Juego extends InterfaceJuego {
 	public void dibujarManzanas(Manzana[] manzanas) {
 		for(int i=0; i<manzanitas.length; i++) {
 			manzanitas[i].dibujarse(this.entorno);
+		}
+	}
+
+	public void dibujarRayos(Rayo[] rayitos) {
+		for(int i=0; i<rayitos.length; i++) {
+			rayitos[i].dibujarse(this.entorno);
 		}
 	}
 
@@ -151,13 +162,21 @@ public class Juego extends InterfaceJuego {
 
 		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
 			perrito.disparar(perrito, rayito);
+			// perrito.disparar(perrito, rayitos);
+			// for (int i = 0; i < rayitos.length; i++){
+			// 	perrito.disparar(perrito, rayitos[i]);
+			// }
 		}
 		
 
 
 		
 		dibujarManzanas(manzanitas);
-		rayito.dibujar(entorno);
+		// dibujarRayos(rayitos);
+		// for (int i = 0; i < rayitos.length; i++){
+		// 	rayitos[i].mover();
+		// }
+		rayito.dibujarse(entorno);
 		rayito.mover();
 		perrito.dibujarse(this.entorno);
 		plantita.dibujarse(this.entorno);
@@ -168,7 +187,7 @@ public class Juego extends InterfaceJuego {
 
 
 		entorno.cambiarFont("Arial", 18, Color.white);
-		entorno.escribirTexto("Puntos:",600, 30);
+		entorno.escribirTexto("Puntos: " + perrito.puntos,600, 30);
 		entorno.escribirTexto("posicion en x:" + perrito.x, 600, 50);
 		entorno.escribirTexto("posicion en y:" + perrito.y, 600, 100);
 		

@@ -10,6 +10,7 @@ public class Perro {
 	double y;
 	int direccion;
 	Image[] img;
+	int puntos;
 	
 	//constructor
 	public Perro(double x, double y) {
@@ -22,7 +23,7 @@ public class Perro {
 			img[i] = Herramientas.cargarImagen("perrito"+i+".png");	
 		}
 
-
+		this.puntos = 0;
 	}
 	
 	public void dibujarse(Entorno entorno)
@@ -68,5 +69,9 @@ public class Perro {
 	public void disparar(Perro perrito, Rayo rayito) {
 		rayito.actualizar(perrito);
 		rayito.disparando();
+	}
+
+	public void sumarPuntos(){
+		this.puntos += 5;
 	}
 }

@@ -26,7 +26,7 @@ public class Rayo {
         disparando = "1";
     }
 
-	public void dibujar(Entorno entorno){
+	public void dibujarse(Entorno entorno){
 		if (disparando == "1"){
 			entorno.dibujarImagen(rayoImg, this.x, this.y, 0, 0.1);
 		}
