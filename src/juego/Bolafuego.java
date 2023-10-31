@@ -1,62 +1,144 @@
 package juego;
 
 import java.awt.Image;
+import java.util.Random;
 
 import entorno.Entorno;
 import entorno.Herramientas;
 
 public class Bolafuego {
+
     double x;
-    double y;
+	double y;
     int direccion;
-    Image[] img;
-
-    public Bolafuego(double x, double y){
-        this.x = x;
-        this.y = y;
+	double ancho;
+	double alto;
+	double escala;
+	Image[] img;
+	String disparando;
+    	
+    //constructor
+	public Bolafuego(double x, double y) {
+		this.x = x;
+		this.y = y;
         this.direccion = 0;
-        this.img = new Image[4];
-
-        for (int i=0; i < img.length ; i++) {
+		this.escala=0.07;
+		this.img = new Image[4];
+		this.disparando = null;
+		for (int i=0; i < img.length ; i++) {
             img[i] = Herramientas.cargarImagen("bolaFuego"+i+".png");
     }
- }
- public void dibujarse(Entorno entorno)
- {
-     entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.08);
- }
- public void mover(int d)
-    {
-        this.direccion=d;
+		this.ancho=img[0].getWidth(null)*this.escala;
+		this.alto=img[0].getHeight(null)*this.escala;
+	}
 
-        if (direccion ==0)
-        {
-            y-=3;
-        }
-        if (direccion ==1)
-        {
-            x+=3;
-        }
-        if (direccion ==2)
-        {
-            y+=3;
-        }
-        if (direccion ==3)
-        {
-            x-=3;
-        }
-
-        if (this.x>745) {
-            x=745;
-        }
-        if (this.x<53) {
-            x=53;
-        }
-        if(this.y>545) {
-            y=545;
-        }
-        if(this.y<57) {
-            y=57;
-        }
+	public void disparando() {
+        disparando = "1";
     }
+
+	public void dibujar(Entorno entorno){
+		if (disparando == "1"){
+			entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.07);
+		}
+	}
+
+	public void mover(){
+		if (this.disparando == "1"){
+			if (this.direccion == 0) {
+                // Mover el rayo hacia arriba
+                y -= 4.5;
+            } else if (this.direccion == 1) {
+                // Mover el rayo hacia la derecha
+                x += 4.5;
+            } else if (this.direccion == 2) {
+                // Mover el rayo hacia abajo
+                y += 4.5;
+            } else if (this.direccion == 3) {
+                // Mover el rayo hacia la izquierda
+                x -= 4.5;
+            }
+
+			if (this.x>829) {
+				disparando = null;
+			}
+			if (this.x<24) {
+				disparando = null;
+			}
+			if(this.y>582) {
+				disparando = null;
+			}
+			if(this.y<16) {
+				disparando = null;
+			}
+		}
+	}
+
+	public void actualizar(Planta plantita){
+		this.x = plantita.x;
+		this.y = plantita.y;
+		this.direccion = plantita.direccion;
+	}
+	
+	public int TiempoRandom(){
+		Random generadorAleatorio = new Random();
+
+        int minimo = 1;
+        int maximo = 400;
+
+        int numeroAleatorio = generadorAleatorio.nextInt(maximo - minimo + 1) + minimo;
+		int numeroAleatorio2 = generadorAleatorio.nextInt(maximo - minimo + 1) + minimo;
+
+		if (numeroAleatorio>numeroAleatorio2){
+			return numeroAleatorio;
+		}
+		else{
+			return numeroAleatorio2;
+		}
+		
+	}
+
+	public int colisionFuego (Bolafuego m, Perro1 a) {
+		double zona1 = m.x-(m.ancho); //zona izquieda manzana
+		double zona3 = m.x+(m.ancho); //zona derecha manzana
+		double zona2 = m.y-(m.alto/2-25); //zona arriba manzana
+		double zona0 = m.y+(m.alto/2-25);  //zona abajo manzana
+	   
+		if(a.y > zona2 && a.y < zona0 && a.x>zona1 && a.x<zona3) {
+			return 1;
+		}
+	   
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 2;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 0;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 3;
+		}
+		return 5;
+	}
+
+    public int colisionFuego (Bolafuego m, Perro2 a) {
+		double zona1 = m.x-(m.ancho); //zona izquieda manzana
+		double zona3 = m.x+(m.ancho); //zona derecha manzana
+		double zona2 = m.y-(m.alto/2-25); //zona arriba manzana
+		double zona0 = m.y+(m.alto/2-25);  //zona abajo manzana
+	   
+		if(a.y > zona2 && a.y < zona0 && a.x>zona1 && a.x<zona3) {
+			return 1;
+		}
+	   
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 2;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 0;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 3;
+		}
+		return 5;
+	}
+
 }

@@ -4,7 +4,7 @@ import java.awt.Image;
 import entorno.Entorno;
 import entorno.Herramientas;
 
-public class Rayo {
+public class RayoP1 {
     // Variables de instancia
     double x;
 	double y;
@@ -14,7 +14,7 @@ public class Rayo {
 	String disparando;
     	
     //constructor
-	public Rayo(double x, double y) {
+	public RayoP1(double x, double y) {
 		this.x = x;
 		this.y = y;
         this.direccion = 0;
@@ -63,7 +63,7 @@ public class Rayo {
 		}
 	}
 
-	public void actualizar(Perro perrito){
+	public void actualizar(Perro1 perrito){
 		this.x = perrito.x;
 		this.y = perrito.y;
 		this.direccion = perrito.direccion;

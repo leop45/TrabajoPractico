@@ -1,19 +1,21 @@
 package juego;
 
 import java.awt.Image;
+import java.util.LinkedList;
 import entorno.Entorno;
 import entorno.Herramientas;
 
-public class Perro {
+public class Perro1 {
 	// Variables de instancia
 	double x;
 	double y;
 	int direccion;
 	Image[] img;
 	int puntos;
+	// LinkedList<RayoP1> rayos;
 	
 	//constructor
-	public Perro(double x, double y) {
+	public Perro1(double x, double y) {
 		this.x = x;
 		this.y = y;
 		this.direccion = 0;
@@ -24,6 +26,7 @@ public class Perro {
 		}
 
 		this.puntos = 0;
+		// this.rayos = new LinkedList<>();
 	}
 	
 	public void dibujarse(Entorno entorno)
@@ -66,10 +69,19 @@ public class Perro {
 		}
 	}
 
-	public void disparar(Perro perrito, Rayo rayito) {
+	public void disparar(Perro1 perrito, RayoP1 rayito) {
+		// RayoP1 nuevoRayito = new RayoP1(perrito.x, perrito.y);
+		// rayos.add(nuevoRayito);
 		rayito.actualizar(perrito);
 		rayito.disparando();
 	}
+
+	// public void actualizarDisparos(){
+	// 	for (RayoP1 rayito : rayos){
+	// 		rayito.actualizar(this.x, this.y, this.direccion);
+	// 		rayito.disparando();
+	// 	}
+	// }
 
 	public void sumarPuntos(){
 		this.puntos += 5;
