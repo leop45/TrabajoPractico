@@ -1,6 +1,15 @@
 package juego;
 
 import java.awt.Color;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import entorno.Entorno;
 import entorno.Herramientas;
 import entorno.InterfaceJuego;
@@ -21,6 +30,7 @@ public class Juego extends InterfaceJuego {
 	Bolafuego fueguito2;
 	Auto autito;
 	Fondo fondo;
+	boolean jugador1;
 	boolean jugador2;
 	// Rayo[] rayitos;
 	
@@ -42,6 +52,7 @@ public class Juego extends InterfaceJuego {
 		fueguito2 = new Bolafuego(plantita2.x-20, plantita2.y+20);
 		autito = new Auto(116, 518);
 		fondo = new Fondo (425, 300);
+		jugador1 = true;
 		jugador2 = false;
 		int posXManzana= 100;
 		int posYManzana= 128;
@@ -143,6 +154,7 @@ public class Juego extends InterfaceJuego {
 	int movAuto=1;
 	int cont1=0;
 	int cont2=0;
+	int contMuerte=0;
 
 	// public void dibujarRayo() {
 	// 	rayo.dibujarse(this.entorno);
@@ -162,6 +174,7 @@ public class Juego extends InterfaceJuego {
 		cont2+=2;
 		boolean colisiones=false;
 		autito.mover(movAuto);
+
         if(autito.choque(autito)==1){
             movAuto=3;
         }
@@ -175,46 +188,67 @@ public class Juego extends InterfaceJuego {
             movAuto=0;
         }
 
+
+		//COLISION AUTO, PLANTA Y BOLA DE FUEGO CON PERRITO:
 		if(autito.colisionAuto(autito, perrito, movAuto)!=5){
 			colisiones=true;
+			jugador1 = false;
 		}
 
 		if(plantita1.colisionPlanta(plantita1, perrito)!=5){
 			colisiones=true;
+			jugador1 = false;
+		}
+
+		if(plantita1.colisionPlanta(plantita1, rayito1)!=5){
+			rayito1.disparando = false;
+            plantita1.aparece = false;
 		}
 
 		if(fueguito1.colisionFuego(fueguito1, perrito)!=5){
 			colisiones=true;
+			jugador1 = false;
 		}
 
 		if(plantita1.colisionPlanta(plantita2, perrito)!=5){
 			colisiones=true;
+			jugador1 = false;
 		}
 
 		if(fueguito1.colisionFuego(fueguito2, perrito)!=5){
 			colisiones=true;
+			jugador1 = false;
 		}
 
+
+		//COLISION AUTO, PLANTA Y BOLA DE FUEGO CON PERRITA:
 		if(autito.colisionAuto(autito, perrita, movAuto)!=5){
 			colisiones=true;
+			jugador2 = false;
 		}
 
 		if(plantita1.colisionPlanta(plantita1, perrita)!=5){
 			colisiones=true;
+			jugador2 = false;
 		}
 
 		if(fueguito1.colisionFuego(fueguito1, perrita)!=5){
 			colisiones=true;
+			jugador2 = false;
 		}
 
 		if(plantita1.colisionPlanta(plantita2, perrita)!=5){
 			colisiones=true;
+			jugador2 = false;
 		}
 
 		if(fueguito1.colisionFuego(fueguito2, perrita)!=5){
 			colisiones=true;
+			jugador2 = false;
 		}
 
+
+		//VERIFICAR MOVIMIENTO DE PERRITO:
 		if (entorno.estaPresionada(entorno.TECLA_DERECHA) && colisionMultiple(manzanitas,perrito)!=1 ) {
 			perrito.mover(1);
 		}
@@ -231,27 +265,31 @@ public class Juego extends InterfaceJuego {
 			perrito.mover(3);
 		}
 
-		if (entorno.estaPresionada('d') && colisionMultiple(manzanitas,perrita)!=1 ) {
+
+		//VERIFICAR MOVIMIENTO DE PERRITA:
+		if (entorno.estaPresionada('t') && contMuerte==0){
 			jugador2 = true;
+			contMuerte++;
+		}
+
+		if (entorno.estaPresionada('d') && colisionMultiple(manzanitas,perrita)!=1 && jugador2) {
 			perrita.mover(1);
 		}
 			
-		else if (entorno.estaPresionada('w') && colisionMultiple(manzanitas,perrita)!=0) {
-			jugador2 = true;
+		else if (entorno.estaPresionada('w') && colisionMultiple(manzanitas,perrita)!=0 && jugador2) {
 			perrita.mover(0);
 		}	
 			
-		else if (entorno.estaPresionada('s') && colisionMultiple(manzanitas,perrita)!=2) {
-			jugador2 = true;
+		else if (entorno.estaPresionada('s') && colisionMultiple(manzanitas,perrita)!=2 && jugador2) {
 			perrita.mover(2);
 		}
 			
-		else if (entorno.estaPresionada('a') && colisionMultiple(manzanitas,perrita)!=3) {
-			jugador2 = true;
+		else if (entorno.estaPresionada('a') && colisionMultiple(manzanitas,perrita)!=3 && jugador2) {
 			perrita.mover(3);
 		}
 		
 
+		//MOVIMIENTO DE LAS PLANTAS:
 		plantita1.mover(mov1);
 		if(plantita1.choque(plantita1)==1){
 			mov1=3;
@@ -268,6 +306,8 @@ public class Juego extends InterfaceJuego {
 			mov2=1;
 		}
 
+
+		//MOVIMIENTO DEL AUTO:
 		autito.mover(movAuto);
 		if(autito.choque(autito)==1){
 		 	movAuto=3;
@@ -276,10 +316,8 @@ public class Juego extends InterfaceJuego {
 		 	movAuto=1;
 		}
 
-		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
-			perrito.disparar(perrito, rayito1);
-		}
 
+		//DISPAROS DE LAS PLANTAS:
 		if (cont1==200){
 			plantita1.disparar(plantita1, fueguito1);
 			cont1=0;
@@ -290,6 +328,8 @@ public class Juego extends InterfaceJuego {
 			cont2=0;
 		}
 
+
+		//VERIFICAR SI PERRITO DISPARA:
 		if (entorno.sePresiono(entorno.TECLA_ESPACIO)){
 			perrito.disparar(perrito, rayito1);
 			// perrito.disparar(perrito);
@@ -300,13 +340,15 @@ public class Juego extends InterfaceJuego {
 			// }
 		}
 
+
+		//VERIFICAR SI PERRITA DISPARA:
 		if (entorno.sePresiono('f')){
 			perrita.disparar(perrita, rayito2);
 		}
 
 		
 
-
+		//DIBUJAR OBJETOS EN PANTALLA:
 		fondo.dibujarse(entorno);
 		dibujarManzanas(manzanitas);
 		// dibujarRayos(rayitos);
@@ -317,9 +359,12 @@ public class Juego extends InterfaceJuego {
 		// 	rayito.dibujarse(entorno);
 		// 	rayito.mover();
 		// }
-		
-		rayito1.dibujarse(entorno);
-		rayito1.mover();
+
+		if (jugador1){
+			rayito1.dibujarse(entorno);
+			rayito1.mover();
+			perrito.dibujarse(this.entorno);
+		}
 
 		if(jugador2){
 			rayito2.dibujar(entorno);
@@ -327,7 +372,6 @@ public class Juego extends InterfaceJuego {
 			perrita.dibujarse(this.entorno);
 		}
 
-		perrito.dibujarse(this.entorno);
 		plantita1.dibujarse(this.entorno);
 		plantita2.dibujarse(this.entorno);
 		fueguito1.dibujar(entorno);
@@ -349,7 +393,41 @@ public class Juego extends InterfaceJuego {
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
+		// JFrame frame = new JFrame("Juego");
+
+        // frame.setSize(850, 600);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setLayout(new FlowLayout());
+
+        // JButton jugarButton = new JButton("Jugar");
+        // jugarButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         JOptionPane.showMessageDialog(null, "Iniciando el juego");
+        //         Juego juego = new Juego();
+        //     }
+        // });
+        // JButton puntajesButton = new JButton("Puntajes");
+        // puntajesButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         JOptionPane.showMessageDialog(null, "Mostrando puntajes");
+        //     }
+        // });
+        // JButton salirButton = new JButton("Salir");
+        // salirButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         int confirmExit = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres salir del juego?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
+        //         if (confirmExit == JOptionPane.YES_OPTION) {
+        //             System.exit(0);
+        //         }
+        //     }
+        // });
+        // frame.add(jugarButton);
+        // frame.add(puntajesButton);
+        // frame.add(salirButton);
+
+        // // Mostrar la ventana
+        // frame.setVisible(true);
 		Juego juego = new Juego();
-	}
+    }
 
 }

@@ -11,7 +11,7 @@ public class RayoP1 {
     int direccion;
 	Image rayoImg;
 	// boolean disparando;
-	String disparando;
+	boolean disparando;
     	
     //constructor
 	public RayoP1(double x, double y) {
@@ -19,21 +19,21 @@ public class RayoP1 {
 		this.y = y;
         this.direccion = 0;
 		this.rayoImg = Herramientas.cargarImagen("rayo.png");
-		this.disparando = null;
+		this.disparando = false;
 	}
 
 	public void disparando() {
-        disparando = "1";
+        this.disparando = true;
     }
 
 	public void dibujarse(Entorno entorno){
-		if (disparando == "1"){
+		if (this.disparando){
 			entorno.dibujarImagen(rayoImg, this.x, this.y, 0, 0.1);
 		}
 	}
 
 	public void mover(){
-		if (this.disparando == "1"){
+		if (this.disparando){
 			if (this.direccion == 0) {
                 // Mover el rayo hacia arriba
                 y -= 4.5;
@@ -49,16 +49,16 @@ public class RayoP1 {
             }
 
 			if (this.x>829) {
-				disparando = null;
+				disparando = false;
 			}
 			if (this.x<24) {
-				disparando = null;
+				disparando = false;
 			}
 			if(this.y>582) {
-				disparando = null;
+				disparando = false;
 			}
 			if(this.y<16) {
-				disparando = null;
+				disparando = false;
 			}
 		}
 	}
