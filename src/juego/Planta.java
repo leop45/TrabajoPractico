@@ -40,7 +40,7 @@ public class Planta {
     }
  public void mover(int d)
     {
-        if(aparece){
+        if(this.aparece){
             this.direccion=d;
     
             if (direccion ==0)
@@ -138,21 +138,17 @@ public class Planta {
         double zona0 = m.y+(m.alto/2);  //zona abajo manzana
        
         if(a.y > zona2 && a.y < zona0 && a.x>zona1 && a.x<zona3) {
-            a.disparando = false;
-            m.aparece = false;
+            return 1;
         }
        
         if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
-            a.disparando = false;
-            m.aparece = false;
+            return 2;
         }
         if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
-            a.disparando = false;
-            m.aparece = false;
+            return 0;
         }
         if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
-            a.disparando = false;
-            m.aparece = false;
+            return 3;
         }
         return 5;
     }
@@ -160,5 +156,8 @@ public class Planta {
     public void disparar(Planta plantita, Bolafuego fueguito) {
 		fueguito.actualizar(plantita);
 		fueguito.disparando();
+        if (plantita.aparece == false){
+            fueguito.disparando = false;
+        }
 	}
 }

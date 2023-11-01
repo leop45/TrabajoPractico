@@ -15,7 +15,7 @@ public class Bolafuego {
 	double alto;
 	double escala;
 	Image[] img;
-	String disparando;
+	boolean disparando;
     	
     //constructor
 	public Bolafuego(double x, double y) {
@@ -24,7 +24,7 @@ public class Bolafuego {
         this.direccion = 0;
 		this.escala=0.07;
 		this.img = new Image[4];
-		this.disparando = null;
+		this.disparando = false;
 		for (int i=0; i < img.length ; i++) {
             img[i] = Herramientas.cargarImagen("bolaFuego"+i+".png");
     }
@@ -33,17 +33,17 @@ public class Bolafuego {
 	}
 
 	public void disparando() {
-        disparando = "1";
+        disparando = true;
     }
 
 	public void dibujar(Entorno entorno){
-		if (disparando == "1"){
+		if (disparando){
 			entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.07);
 		}
 	}
 
 	public void mover(){
-		if (this.disparando == "1"){
+		if (this.disparando){
 			if (this.direccion == 0) {
                 // Mover el rayo hacia arriba
                 y -= 4.5;
@@ -59,16 +59,16 @@ public class Bolafuego {
             }
 
 			if (this.x>829) {
-				disparando = null;
+				disparando = false;
 			}
 			if (this.x<24) {
-				disparando = null;
+				disparando = false;
 			}
 			if(this.y>582) {
-				disparando = null;
+				disparando = false;
 			}
 			if(this.y<16) {
-				disparando = null;
+				disparando = false;
 			}
 		}
 	}
@@ -120,6 +120,28 @@ public class Bolafuego {
 	}
 
     public int colisionFuego (Bolafuego m, Perro2 a) {
+		double zona1 = m.x-(m.ancho); //zona izquieda manzana
+		double zona3 = m.x+(m.ancho); //zona derecha manzana
+		double zona2 = m.y-(m.alto/2-25); //zona arriba manzana
+		double zona0 = m.y+(m.alto/2-25);  //zona abajo manzana
+	   
+		if(a.y > zona2 && a.y < zona0 && a.x>zona1 && a.x<zona3) {
+			return 1;
+		}
+	   
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 2;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 0;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 3;
+		}
+		return 5;
+	}
+
+	public int colisionFuego (Bolafuego m, RayoP1 a) {
 		double zona1 = m.x-(m.ancho); //zona izquieda manzana
 		double zona3 = m.x+(m.ancho); //zona derecha manzana
 		double zona2 = m.y-(m.alto/2-25); //zona arriba manzana

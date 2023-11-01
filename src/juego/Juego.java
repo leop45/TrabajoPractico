@@ -1,10 +1,5 @@
 package juego;
 
-import java.awt.Color;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -210,9 +205,19 @@ public class Juego extends InterfaceJuego {
 			jugador1 = false;
 		}
 
+		if(fueguito1.colisionFuego(fueguito1, rayito1)!=5){
+			rayito1.disparando = false;
+            fueguito1.disparando = false;
+		}
+
 		if(plantita1.colisionPlanta(plantita2, perrito)!=5){
 			colisiones=true;
 			jugador1 = false;
+		}
+
+		if(plantita1.colisionPlanta(plantita2, rayito1)!=5){
+			rayito1.disparando = false;
+            plantita2.aparece = false;
 		}
 
 		if(fueguito1.colisionFuego(fueguito2, perrito)!=5){
@@ -372,7 +377,10 @@ public class Juego extends InterfaceJuego {
 			perrita.dibujarse(this.entorno);
 		}
 
-		plantita1.dibujarse(this.entorno);
+		if (plantita1.aparece){
+
+			plantita1.dibujarse(this.entorno);
+		}
 		plantita2.dibujarse(this.entorno);
 		fueguito1.dibujar(entorno);
 		fueguito1.mover();
@@ -393,41 +401,65 @@ public class Juego extends InterfaceJuego {
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		// JFrame frame = new JFrame("Juego");
+		JFrame frame = new JFrame("Juego");
 
-        // frame.setSize(850, 600);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.setLayout(new FlowLayout());
+        // Configurar la ventana
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
 
-        // JButton jugarButton = new JButton("Jugar");
-        // jugarButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         JOptionPane.showMessageDialog(null, "Iniciando el juego");
-        //         Juego juego = new Juego();
-        //     }
-        // });
-        // JButton puntajesButton = new JButton("Puntajes");
-        // puntajesButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         JOptionPane.showMessageDialog(null, "Mostrando puntajes");
-        //     }
-        // });
-        // JButton salirButton = new JButton("Salir");
-        // salirButton.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         int confirmExit = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres salir del juego?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
-        //         if (confirmExit == JOptionPane.YES_OPTION) {
-        //             System.exit(0);
-        //         }
-        //     }
-        // });
-        // frame.add(jugarButton);
-        // frame.add(puntajesButton);
-        // frame.add(salirButton);
+        // Cargar la imagen de fondo
+        ImageIcon backgroundIcon = new ImageIcon("menu_background.png");
+        JLabel backgroundLabel = new JLabel(backgroundIcon);
 
-        // // Mostrar la ventana
-        // frame.setVisible(true);
-		Juego juego = new Juego();
+        // Botón "Jugar"
+        JButton jugarButton = new JButton("Jugar");
+        jugarButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
+        jugarButton.setBackground(Color.orange);
+        jugarButton.setForeground(Color.black);
+        jugarButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Coloca aquí la lógica para comenzar el juego
+                JOptionPane.showMessageDialog(null, "Iniciando el juego");
+                Juego juego = new Juego();
+            }
+        });
+
+        // Botón "Puntajes"
+        JButton puntajesButton = new JButton("Puntajes");
+        puntajesButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
+        puntajesButton.setBackground(Color.lightGray);
+        puntajesButton.setForeground(Color.black);
+        puntajesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Coloca aquí la lógica para mostrar los puntajes
+                JOptionPane.showMessageDialog(null, "Mostrando puntajes");
+            }
+        });
+
+        // Botón "Salir"
+        JButton salirButton = new JButton("Salir");
+        salirButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
+        salirButton.setBackground(Color.RED);
+        salirButton.setForeground(Color.black);
+        salirButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int confirmExit = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres salir del juego?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
+                if (confirmExit == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
+
+        // Agregar componentes a la ventana
+        backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+        backgroundLabel.add(jugarButton);
+        backgroundLabel.add(puntajesButton);
+        backgroundLabel.add(salirButton);
+        frame.add(backgroundLabel, BorderLayout.CENTER);
+
+        // Establecer el tamaño de la ventana
+        frame.pack();
+        frame.setSize(850, 600);
+        frame.setVisible(true);
     }
-
 }

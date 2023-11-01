@@ -10,7 +10,6 @@ public class RayoP1 {
 	double y;
     int direccion;
 	Image rayoImg;
-	// boolean disparando;
 	boolean disparando;
     	
     //constructor
