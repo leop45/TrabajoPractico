@@ -19,10 +19,11 @@ public class Juego extends InterfaceJuego {
 	Manzana[] manzanitas;
 	RayoP1 rayito1;
 	RayoP2 rayito2;
-	Planta plantita1;
-    Planta plantita2;
-    Bolafuego fueguito1;
-	Bolafuego fueguito2;
+	// Planta plantita1;
+    // Planta plantita2;
+	Planta[] plantitas;
+    // Bolafuego fueguito1;
+	// Bolafuego fueguito2;
 	Auto autito;
 	Fondo fondo;
 	boolean jugador1;
@@ -41,10 +42,11 @@ public class Juego extends InterfaceJuego {
 		rayito2 = new RayoP2 (perrita.x, perrita.y);
 		manzanitas = new Manzana [6];
 		// rayitos = new Rayo[45];
-		plantita1 = new Planta(550, 33);
-        plantita2 = new Planta(250, 272);
-        fueguito1 = new Bolafuego(plantita1.x-20, plantita1.y+20);
-		fueguito2 = new Bolafuego(plantita2.x-20, plantita2.y+20);
+		// plantita1 = new Planta(550, 33);
+        // plantita2 = new Planta(250, 272);
+		plantitas = new Planta[6];
+        // fueguito1 = new Bolafuego(plantita1.x-20, plantita1.y+20);
+		// fueguito2 = new Bolafuego(plantita2.x-20, plantita2.y+20);
 		autito = new Auto(116, 518);
 		fondo = new Fondo (425, 300);
 		jugador1 = true;
@@ -62,9 +64,18 @@ public class Juego extends InterfaceJuego {
 			}
 		}
 
-		// for (int i = 0; i < rayitos.length; i++){
-		// 	rayitos[i] = new Rayo(perrito.x, perrito.y);
-		// }
+		int posXPlanta = 24;
+		int posYPlanta = 72;
+		for(int i = 0; i<plantitas.length; i++) {
+			plantitas[i] = new Planta(posXPlanta,posYPlanta);
+			if(posXPlanta <= entorno.ancho()-100) {
+				posXPlanta += 250;
+			}
+			if(posXPlanta > entorno.ancho()-100) {
+				posXPlanta = 100;
+				posYPlanta += 245;
+			}
+		}
 
 		// Inicia el juego!
 		this.entorno.iniciar();
@@ -138,9 +149,9 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 
-	public void dibujarRayos(RayoP1[] rayitos) {
-		for(int i=0; i<rayitos.length; i++) {
-			rayitos[i].dibujarse(this.entorno);
+	public void dibujarPlantas(Planta[] plantitas) {
+		for(int i=0; i<plantitas.length; i++) {
+			plantitas[i].dibujarse(this.entorno, plantitas[i]);
 		}
 	}
 
@@ -190,40 +201,77 @@ public class Juego extends InterfaceJuego {
 			jugador1 = false;
 		}
 
-		if(plantita1.colisionPlanta(plantita1, perrito)!=5){
-			colisiones=true;
-			jugador1 = false;
-		}
+		// for (int i = 0; i < plantitas.length; i++){
+		// 	if(plantitas[i].colisionPlanta(plantitas[i], perrito)!=5){
+		// 		colisiones=true;
+		// 		jugador1 = false;
+		// 	}
 
-		if(plantita1.colisionPlanta(plantita1, rayito1)!=5){
-			rayito1.disparando = false;
-            plantita1.aparece = false;
-		}
+		// 	if(plantitas[i].colisionPlanta(plantitas[i], rayito1)!=5){
+		// 		rayito1.disparando = false;
+		// 		plantitas[i] = null;
+		// 	}
 
-		if(fueguito1.colisionFuego(fueguito1, perrito)!=5){
-			colisiones=true;
-			jugador1 = false;
-		}
+		// 	if(plantitas[i].colisionPlanta(plantitas[i], perrita)!=5){
+		// 		colisiones=true;
+		// 		jugador2 = false;
+		// 	}
 
-		if(fueguito1.colisionFuego(fueguito1, rayito1)!=5){
-			rayito1.disparando = false;
-            fueguito1.disparando = false;
-		}
+		// 	if(plantitas[i].colisionPlanta(plantitas[i], rayito2)!=5){
+		// 		rayito1.disparando = false;
+		// 		plantitas[i] = null;
+		// 	}
+		// }
 
-		if(plantita1.colisionPlanta(plantita2, perrito)!=5){
-			colisiones=true;
-			jugador1 = false;
-		}
+		//CODIGO VIEJO
+		// if(plantita1.colisionPlanta(plantita1, perrito)!=5){
+		// 	colisiones=true;
+		// 	jugador1 = false;
+		// }
 
-		if(plantita1.colisionPlanta(plantita2, rayito1)!=5){
-			rayito1.disparando = false;
-            plantita2.aparece = false;
-		}
+		// if(plantita1.colisionPlanta(plantita1, rayito1)!=5){
+		// 	rayito1.disparando = false;
+        //     plantita1.aparece = false;
+		// }
 
-		if(fueguito1.colisionFuego(fueguito2, perrito)!=5){
-			colisiones=true;
-			jugador1 = false;
-		}
+
+		//ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// if(fueguito1.colisionFuego(fueguito1, perrito)!=5){
+		// 	colisiones=true;
+		// 	jugador1 = false;
+		// }
+
+		// if(fueguito1.colisionFuego(fueguito1, rayito1)!=5){
+		// 	rayito1.disparando = false;
+        //     fueguito1.disparando = false;
+		// }
+
+
+
+
+
+		//CODIGO VIEJO
+		// if(plantita1.colisionPlanta(plantita2, perrito)!=5){
+		// 	colisiones=true;
+		// 	jugador1 = false;
+		// }
+
+		// if(plantita1.colisionPlanta(plantita2, rayito1)!=5){
+		// 	rayito1.disparando = false;
+        //     plantita2.aparece = false;
+		// }
+
+
+
+		//ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// if(fueguito1.colisionFuego(fueguito2, perrito)!=5){
+		// 	colisiones=true;
+		// 	jugador1 = false;
+		// }
+
+
+
+
 
 
 		//COLISION AUTO, PLANTA Y BOLA DE FUEGO CON PERRITA:
@@ -232,25 +280,41 @@ public class Juego extends InterfaceJuego {
 			jugador2 = false;
 		}
 
-		if(plantita1.colisionPlanta(plantita1, perrita)!=5){
-			colisiones=true;
-			jugador2 = false;
-		}
+		//CODIGO VIEJO
+		// if(plantita1.colisionPlanta(plantita1, perrita)!=5){
+		// 	colisiones=true;
+		// 	jugador2 = false;
+		// }
 
-		if(fueguito1.colisionFuego(fueguito1, perrita)!=5){
-			colisiones=true;
-			jugador2 = false;
-		}
 
-		if(plantita1.colisionPlanta(plantita2, perrita)!=5){
-			colisiones=true;
-			jugador2 = false;
-		}
 
-		if(fueguito1.colisionFuego(fueguito2, perrita)!=5){
-			colisiones=true;
-			jugador2 = false;
-		}
+
+		//ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// if(fueguito1.colisionFuego(fueguito1, perrita)!=5){
+		// 	colisiones=true;
+		// 	jugador2 = false;
+		// }
+
+
+
+
+
+		//CODIGO VIEJO
+		// if(plantita1.colisionPlanta(plantita2, perrita)!=5){
+		// 	colisiones=true;
+		// 	jugador2 = false;
+		// }
+
+
+		//ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// if(fueguito1.colisionFuego(fueguito2, perrita)!=5){
+		// 	colisiones=true;
+		// 	jugador2 = false;
+		// }
+
+
+
+
 
 
 		//VERIFICAR MOVIMIENTO DE PERRITO:
@@ -295,21 +359,32 @@ public class Juego extends InterfaceJuego {
 		
 
 		//MOVIMIENTO DE LAS PLANTAS:
-		plantita1.mover(mov1);
-		if(plantita1.choque(plantita1)==1){
-			mov1=3;
-		}
-		if(plantita1.choque(plantita1)==2){
-			mov1=1;
-		}
+		// for (int i = 0; i < plantitas.length; i++){
+		// 	plantitas[i].mover(mov1, plantitas[i]);
+		// 	if(plantitas[i].choque(plantitas[i])==1){
+		// 		mov1=3;
+		// 	}
+		// 	if(plantitas[i].choque(plantitas[i])==2){
+		// 		mov1=1;
+		// 	}
+		// }
 
-		plantita2.mover(mov2);
-		if(plantita2.choque(plantita2)==1){
-			mov2=3;
-		}
-		if(plantita2.choque(plantita2)==2){
-			mov2=1;
-		}
+		//CODIGO VIEJO
+		// plantita1.mover(mov1);
+		// if(plantita1.choque(plantita1)==1){
+		// 	mov1=3;
+		// }
+		// if(plantita1.choque(plantita1)==2){
+		// 	mov1=1;
+		// }
+
+		// plantita2.mover(mov2);
+		// if(plantita2.choque(plantita2)==1){
+		// 	mov2=3;
+		// }
+		// if(plantita2.choque(plantita2)==2){
+		// 	mov2=1;
+		// }
 
 
 		//MOVIMIENTO DEL AUTO:
@@ -322,16 +397,16 @@ public class Juego extends InterfaceJuego {
 		}
 
 
-		//DISPAROS DE LAS PLANTAS:
-		if (cont1==200){
-			plantita1.disparar(plantita1, fueguito1);
-			cont1=0;
-		}
+		//DISPAROS DE LAS PLANTAS: ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// if (cont1==200){
+		// 	plantita1.disparar(plantita1, fueguito1);
+		// 	cont1=0;
+		// }
 
-		if (cont2==350){
-			plantita1.disparar(plantita2, fueguito2);
-			cont2=0;
-		}
+		// if (cont2==350){
+		// 	plantita1.disparar(plantita2, fueguito2);
+		// 	cont2=0;
+		// }
 
 
 		//VERIFICAR SI PERRITO DISPARA:
@@ -377,15 +452,29 @@ public class Juego extends InterfaceJuego {
 			perrita.dibujarse(this.entorno);
 		}
 
-		if (plantita1.aparece){
-
-			plantita1.dibujarse(this.entorno);
+		for (int i = 0; i < plantitas.length; i++){
+			if (plantitas[i] != null){
+				dibujarPlantas(plantitas);
+			}
 		}
-		plantita2.dibujarse(this.entorno);
-		fueguito1.dibujar(entorno);
-		fueguito1.mover();
-		fueguito2.dibujar(entorno);
-		fueguito2.mover();
+
+		//CODIGO VIEJO
+		// if (plantita1.aparece){
+
+		// 	plantita1.dibujarse(this.entorno);
+		// }
+		// plantita2.dibujarse(this.entorno);
+
+
+
+		//ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// fueguito1.dibujar(entorno);
+		// fueguito1.mover();
+		// fueguito2.dibujar(entorno);
+		// fueguito2.mover();
+
+
+		
 		autito.dibujarse(this.entorno);
 		
 
@@ -401,65 +490,66 @@ public class Juego extends InterfaceJuego {
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Juego");
+		// JFrame frame = new JFrame("Juego");
 
-        // Configurar la ventana
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+        // // Configurar la ventana
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.setLayout(new BorderLayout());
 
-        // Cargar la imagen de fondo
-        ImageIcon backgroundIcon = new ImageIcon("menu_background.png");
-        JLabel backgroundLabel = new JLabel(backgroundIcon);
+        // // Cargar la imagen de fondo
+        // ImageIcon backgroundIcon = new ImageIcon("menu_background.png");
+        // JLabel backgroundLabel = new JLabel(backgroundIcon);
 
-        // Botón "Jugar"
-        JButton jugarButton = new JButton("Jugar");
-        jugarButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
-        jugarButton.setBackground(Color.orange);
-        jugarButton.setForeground(Color.black);
-        jugarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí la lógica para comenzar el juego
-                JOptionPane.showMessageDialog(null, "Iniciando el juego");
-                Juego juego = new Juego();
-            }
-        });
+        // // Botón "Jugar"
+        // JButton jugarButton = new JButton("Jugar");
+        // jugarButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
+        // jugarButton.setBackground(Color.orange);
+        // jugarButton.setForeground(Color.black);
+        // jugarButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         // Coloca aquí la lógica para comenzar el juego
+        //         JOptionPane.showMessageDialog(null, "Iniciando el juego");
+        //         Juego juego = new Juego();
+        //     }
+        // });
 
-        // Botón "Puntajes"
-        JButton puntajesButton = new JButton("Puntajes");
-        puntajesButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
-        puntajesButton.setBackground(Color.lightGray);
-        puntajesButton.setForeground(Color.black);
-        puntajesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí la lógica para mostrar los puntajes
-                JOptionPane.showMessageDialog(null, "Mostrando puntajes");
-            }
-        });
+        // // Botón "Puntajes"
+        // JButton puntajesButton = new JButton("Puntajes");
+        // puntajesButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
+        // puntajesButton.setBackground(Color.lightGray);
+        // puntajesButton.setForeground(Color.black);
+        // puntajesButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         // Coloca aquí la lógica para mostrar los puntajes
+        //         JOptionPane.showMessageDialog(null, "Mostrando puntajes");
+        //     }
+        // });
 
-        // Botón "Salir"
-        JButton salirButton = new JButton("Salir");
-        salirButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
-        salirButton.setBackground(Color.RED);
-        salirButton.setForeground(Color.black);
-        salirButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int confirmExit = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres salir del juego?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
-                if (confirmExit == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-                }
-            }
-        });
+        // // Botón "Salir"
+        // JButton salirButton = new JButton("Salir");
+        // salirButton.setFont(new Font("Goudy Stout", Font.BOLD, 60));
+        // salirButton.setBackground(Color.RED);
+        // salirButton.setForeground(Color.black);
+        // salirButton.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         int confirmExit = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que quieres salir del juego?", "Confirmar salida", JOptionPane.YES_NO_OPTION);
+        //         if (confirmExit == JOptionPane.YES_OPTION) {
+        //             System.exit(0);
+        //         }
+        //     }
+        // });
 
-        // Agregar componentes a la ventana
-        backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
-        backgroundLabel.add(jugarButton);
-        backgroundLabel.add(puntajesButton);
-        backgroundLabel.add(salirButton);
-        frame.add(backgroundLabel, BorderLayout.CENTER);
+        // // Agregar componentes a la ventana
+        // backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+        // backgroundLabel.add(jugarButton);
+        // backgroundLabel.add(puntajesButton);
+        // backgroundLabel.add(salirButton);
+        // frame.add(backgroundLabel, BorderLayout.CENTER);
 
-        // Establecer el tamaño de la ventana
-        frame.pack();
-        frame.setSize(850, 600);
-        frame.setVisible(true);
+        // // Establecer el tamaño de la ventana
+        // frame.pack();
+        // frame.setSize(850, 600);
+        // frame.setVisible(true);
+		Juego juego = new Juego();
     }
 }
