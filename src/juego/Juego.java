@@ -155,8 +155,8 @@ public class Juego extends InterfaceJuego {
 		}
 	}
 
-	int mov1=1;
-    int mov2=3;
+	// int mov1=1;
+    // int mov2=3;
 	int movAuto=1;
 	int cont1=0;
 	int cont2=0;
@@ -365,12 +365,12 @@ public class Juego extends InterfaceJuego {
 
 		//MOVIMIENTO DE LAS PLANTAS:
 		for (int i = 0; i < plantitas.length; i++){
-			plantitas[i].mover(mov1, plantitas[i]);
-			if(plantitas[i].choque(plantitas)==1){
-				mov1=3;
+			plantitas[i].mover(plantitas[i].mov, plantitas[i]);
+			if(plantitas[i].choque(plantitas[i])==1){
+				plantitas[i].mov=3;
 			}
-			if(plantitas[i].choque(plantitas)==2){
-				mov1=1;
+			if(plantitas[i].choque(plantitas[i])==2){
+				plantitas[i].mov=1;
 			}
 		}
 

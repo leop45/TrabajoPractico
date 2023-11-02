@@ -15,6 +15,7 @@ public class Planta {
     double alto;
     double escala;
     Image[] img;
+    int mov;
     // boolean aparece;
 
     public Planta(double x, double y) {
@@ -30,6 +31,7 @@ public class Planta {
 
         this.ancho = img[0].getWidth(null) * this.escala;
         this.alto = img[0].getHeight(null) * this.escala;
+        this.mov = 1;
     }
 
     public void dibujarse(Entorno entorno, Planta plantita) {
@@ -66,16 +68,17 @@ public class Planta {
 
     }
 
-    public int choque(Planta[] plantitas) {
-        for(int i = 0; i < plantitas.length; i++){
-            if (plantitas[i].x >= 810) {
-                return 1;
-            }
-            if (plantitas[i].x <= 53) {
-                return 2;
-            }
+    public int choque(Planta plantita) {
+
+        if (plantita.x >= 810) {
+            return 1;
         }
-        return 5;
+        if (plantita.x <= 53) {
+            return 2;
+        } else{
+            return 0;
+        }
+
     }
 
     public int colisionPlanta(Planta m, Perro1 a) {
