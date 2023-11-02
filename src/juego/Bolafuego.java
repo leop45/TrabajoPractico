@@ -15,7 +15,6 @@ public class Bolafuego {
 	double alto;
 	double escala;
 	Image[] img;
-	boolean disparando;
     	
     //constructor
 	public Bolafuego(double x, double y) {
@@ -24,7 +23,6 @@ public class Bolafuego {
         this.direccion = 0;
 		this.escala=0.07;
 		this.img = new Image[4];
-		this.disparando = false;
 		for (int i=0; i < img.length ; i++) {
             img[i] = Herramientas.cargarImagen("bolaFuego"+i+".png");
     }
@@ -32,44 +30,36 @@ public class Bolafuego {
 		this.alto=img[0].getHeight(null)*this.escala;
 	}
 
-	public void disparando() {
-        disparando = true;
-    }
-
 	public void dibujar(Entorno entorno){
-		if (disparando){
-			entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.07);
-		}
+		entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.07);
 	}
 
-	public void mover(){
-		if (this.disparando){
-			if (this.direccion == 0) {
-                // Mover el rayo hacia arriba
-                y -= 4.5;
-            } else if (this.direccion == 1) {
-                // Mover el rayo hacia la derecha
-                x += 4.5;
-            } else if (this.direccion == 2) {
-                // Mover el rayo hacia abajo
-                y += 4.5;
-            } else if (this.direccion == 3) {
-                // Mover el rayo hacia la izquierda
-                x -= 4.5;
-            }
+	public void mover(Bolafuego fueguito){
+		if (this.direccion == 0) {
+			// Mover el rayo hacia arriba
+			y -= 4.5;
+		} else if (this.direccion == 1) {
+			// Mover el rayo hacia la derecha
+			x += 4.5;
+		} else if (this.direccion == 2) {
+			// Mover el rayo hacia abajo
+			y += 4.5;
+		} else if (this.direccion == 3) {
+			// Mover el rayo hacia la izquierda
+			x -= 4.5;
+		}
 
-			if (this.x>829) {
-				disparando = false;
-			}
-			if (this.x<24) {
-				disparando = false;
-			}
-			if(this.y>582) {
-				disparando = false;
-			}
-			if(this.y<16) {
-				disparando = false;
-			}
+		if (this.x>829) {
+			fueguito = null;
+		}
+		if (this.x<24) {
+			fueguito = null;
+		}
+		if(this.y>582) {
+			fueguito = null;
+		}
+		if(this.y<16) {
+			fueguito = null;
 		}
 	}
 

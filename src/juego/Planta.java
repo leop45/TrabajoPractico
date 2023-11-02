@@ -15,7 +15,8 @@ public class Planta {
     double alto;
     double escala;
     Image[] img;
-    int mov;
+    int horizontal;
+    int vertical;
     // boolean aparece;
 
     public Planta(double x, double y) {
@@ -31,10 +32,11 @@ public class Planta {
 
         this.ancho = img[0].getWidth(null) * this.escala;
         this.alto = img[0].getHeight(null) * this.escala;
-        this.mov = 1;
+        this.horizontal = 1;
+        this.vertical = 0;
     }
 
-    public void dibujarse(Entorno entorno, Planta plantita) {
+    public void dibujarse(Entorno entorno) {
         entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.2);
     }
 
@@ -171,7 +173,6 @@ public class Planta {
 
     public void disparar(Planta plantita, Bolafuego fueguito) {
         fueguito.actualizar(plantita);
-        fueguito.disparando();
         if (plantita == null) {
             fueguito = null;
         }
