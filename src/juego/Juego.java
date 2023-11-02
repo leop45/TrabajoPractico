@@ -201,6 +201,8 @@ public class Juego extends InterfaceJuego {
 			jugador1 = false;
 		}
 
+
+		//ARREGLAR DESPUES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		// for (int i = 0; i < plantitas.length; i++){
 		// 	if(plantitas[i].colisionPlanta(plantitas[i], perrito)!=5){
 		// 		colisiones=true;
@@ -222,6 +224,9 @@ public class Juego extends InterfaceJuego {
 		// 		plantitas[i] = null;
 		// 	}
 		// }
+
+
+
 
 		//CODIGO VIEJO
 		// if(plantita1.colisionPlanta(plantita1, perrito)!=5){
@@ -359,15 +364,15 @@ public class Juego extends InterfaceJuego {
 		
 
 		//MOVIMIENTO DE LAS PLANTAS:
-		// for (int i = 0; i < plantitas.length; i++){
-		// 	plantitas[i].mover(mov1, plantitas[i]);
-		// 	if(plantitas[i].choque(plantitas[i])==1){
-		// 		mov1=3;
-		// 	}
-		// 	if(plantitas[i].choque(plantitas[i])==2){
-		// 		mov1=1;
-		// 	}
-		// }
+		for (int i = 0; i < plantitas.length; i++){
+			plantitas[i].mover(mov1, plantitas[i]);
+			if(plantitas[i].choque(plantitas)==1){
+				mov1=3;
+			}
+			if(plantitas[i].choque(plantitas)==2){
+				mov1=1;
+			}
+		}
 
 		//CODIGO VIEJO
 		// plantita1.mover(mov1);
@@ -474,7 +479,7 @@ public class Juego extends InterfaceJuego {
 		// fueguito2.mover();
 
 
-		
+
 		autito.dibujarse(this.entorno);
 		
 

@@ -66,15 +66,16 @@ public class Planta {
 
     }
 
-    public int choque(Planta plantita) {
-        if (plantita.x >= 810) {
-            return 1;
+    public int choque(Planta[] plantitas) {
+        for(int i = 0; i < plantitas.length; i++){
+            if (plantitas[i].x >= 810) {
+                return 1;
+            }
+            if (plantitas[i].x <= 53) {
+                return 2;
+            }
         }
-        if (plantita.x <= 53) {
-            return 2;
-        } else {
-            return 0;
-        }
+        return 5;
     }
 
     public int colisionPlanta(Planta m, Perro1 a) {
