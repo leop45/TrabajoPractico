@@ -1,9 +1,6 @@
 package juego;
 
 import java.awt.Image;
-import java.security.PublicKey;
-import java.util.Random;
-
 import entorno.Entorno;
 import entorno.Herramientas;
 
@@ -17,7 +14,7 @@ public class Planta {
     Image[] img;
     int horizontal;
     int vertical;
-    // boolean aparece;
+    boolean debeEliminarse;
 
     public Planta(double x, double y) {
         this.escala = 0.1;
@@ -34,10 +31,15 @@ public class Planta {
         this.alto = img[0].getHeight(null) * this.escala;
         this.horizontal = 1;
         this.vertical = 0;
+        this.debeEliminarse = false;
     }
 
     public void dibujarse(Entorno entorno) {
         entorno.dibujarImagen(img[this.direccion], this.x, this.y, 0, 0.2);
+    }
+
+    public void eliminar(){
+        this.debeEliminarse = true;
     }
 
     public void mover(int d, Planta plantita) {
@@ -172,9 +174,10 @@ public class Planta {
     }
 
     public void disparar(Planta plantita, Bolafuego fueguito) {
-        fueguito.actualizar(plantita);
         if (plantita == null) {
             fueguito = null;
+        }else{
+            fueguito.actualizar(plantita);
         }
     }
 }
