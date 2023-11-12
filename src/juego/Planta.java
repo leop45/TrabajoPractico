@@ -45,31 +45,17 @@ public class Planta {
     public void mover(int d, Planta plantita) {
         this.direccion = d;
         if (direccion == 0) {
-            y -= 0.7;
+            y -= 0.9;
         }
         if (direccion == 1) {
-            x += 0.7;
+            x += 0.9;
         }
         if (direccion == 2) {
-            y += 0.7;
+            y += 0.9;
         }
         if (direccion == 3) {
-            x -= 0.7;
+            x -= 0.9;
         }
-
-        if (this.x > 810) {
-            x = 810;
-        }
-        if (this.x < 53) {
-            x = 53;
-        }
-        if (this.y > 545) {
-            y = 545;
-        }
-        if (this.y < 57) {
-            y = 57;
-        }
-
     }
 
     public int choque(Planta plantita) {
@@ -174,10 +160,6 @@ public class Planta {
     }
 
     public void disparar(Planta plantita, Bolafuego fueguito) {
-        if (plantita == null) {
-            fueguito = null;
-        }else{
-            fueguito.actualizar(plantita);
-        }
+        fueguito.actualizar(plantita);
     }
 }

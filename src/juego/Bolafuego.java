@@ -48,19 +48,6 @@ public class Bolafuego {
 			// Mover el rayo hacia la izquierda
 			x -= 4.5;
 		}
-
-		if (this.x>829) {
-			fueguito = null;
-		}
-		if (this.x<24) {
-			fueguito = null;
-		}
-		if(this.y>582) {
-			fueguito = null;
-		}
-		if(this.y<16) {
-			fueguito = null;
-		}
 	}
 
 	public void actualizar(Planta plantita){
@@ -132,6 +119,28 @@ public class Bolafuego {
 	}
 
 	public int colisionFuego (Bolafuego m, RayoP1 a) {
+		double zona1 = m.x-(m.ancho); //zona izquieda manzana
+		double zona3 = m.x+(m.ancho); //zona derecha manzana
+		double zona2 = m.y-(m.alto/2-25); //zona arriba manzana
+		double zona0 = m.y+(m.alto/2-25);  //zona abajo manzana
+	   
+		if(a.y > zona2 && a.y < zona0 && a.x>zona1 && a.x<zona3) {
+			return 1;
+		}
+	   
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 2;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 0;
+		}
+		if(a.x > zona1 && a.x < zona3 && a.y>zona2 && a.y<zona0) {
+			return 3;
+		}
+		return 5;
+	}
+
+	public int colisionFuego (Bolafuego m, RayoP2 a) {
 		double zona1 = m.x-(m.ancho); //zona izquieda manzana
 		double zona3 = m.x+(m.ancho); //zona derecha manzana
 		double zona2 = m.y-(m.alto/2-25); //zona arriba manzana
