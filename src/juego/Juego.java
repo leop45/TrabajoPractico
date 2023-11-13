@@ -69,10 +69,8 @@ public class Juego extends InterfaceJuego {
 		}
 
 		for(int i = 0; i<fueguitos.length; i++) {
-			if (plantitas[i] != null){
-				fueguitos[i] = new Bolafuego(plantitas[i].x,plantitas[i].y);
-				fueguitos[i].direccion = 1;
-			}
+			fueguitos[i] = new Bolafuego(plantitas[i].x,plantitas[i].y);
+			fueguitos[i].direccion = 1;
 		}
 
 		// Inicia el juego!
@@ -243,41 +241,35 @@ public class Juego extends InterfaceJuego {
 		
 		//COLISION BOLA DE FUEGO CON RAYITO1
 		for(int i=0; i<fueguitos.length; i++) {
-			if(fueguitos[i]!=null){
-				if(fueguitos[i].colisionFuego(fueguitos[i], rayito1)!=5){
-					rayito1 = null;
-					rayito1 = new RayoP1 (perrito.x, perrito.y);
-				}
+			if(fueguitos[i]!=null && fueguitos[i].colisionFuego(fueguitos[i], rayito1)!=5){
+				rayito1 = null;
+				rayito1 = new RayoP1 (perrito.x, perrito.y);
+				fueguitos[i] = null;
 			}
 		}
 
 		//COLISION BOLA DE FUEGO CON RAYITO2
 		for(int i=0; i<fueguitos.length; i++) {
-			if(fueguitos[i]!=null){
-				if(fueguitos[i].colisionFuego(fueguitos[i], rayito2)!=5){
-					rayito2 = null;
-					rayito2 = new RayoP2 (perrita.x, perrita.y);
-				}
+			if(fueguitos[i]!=null && fueguitos[i].colisionFuego(fueguitos[i], rayito2)!=5){
+				rayito2 = null;
+				rayito2 = new RayoP2 (perrita.x, perrita.y);
+				fueguitos[i] = null;
 			}
 		}
 
 		//COLISION BOLA DE FUEGO CON PERRO
 		for(int i=0; i<fueguitos.length; i++) {
-			if(fueguitos[i]!=null){
-				if(fueguitos[i].colisionFuego(fueguitos[i], perrito)!=5){
-					colisiones=true;
-					jugador1 = false;
-				}
+			if(fueguitos[i]!=null && fueguitos[i].colisionFuego(fueguitos[i], perrito)!=5){
+				colisiones=true;
+				jugador1 = false;
 			}
 		}
 
 		//COLISION BOLA DE FUEGO CON PERRA
 		for(int i=0; i<fueguitos.length; i++) {
-			if(fueguitos[i]!=null){
-				if(fueguitos[i].colisionFuego(fueguitos[i], perrita)!=5){
-					colisiones=true;
-					jugador2 = false;
-				}
+			if(fueguitos[i]!=null && fueguitos[i].colisionFuego(fueguitos[i], perrita)!=5){
+				colisiones=true;
+				jugador2 = false;
 			}
 		}
 
@@ -346,6 +338,16 @@ public class Juego extends InterfaceJuego {
 		 	movAuto=1;
 		}
 
+		//MOVIMIENTO DE BOLA DE FUEGO
+		for (int i = 0; i < fueguitos.length; i++) {
+			if (fueguitos[i]!=null){
+				fueguitos[i].mover(fueguitos[i]);
+			} else {
+				fueguitos[i] = new Bolafuego(plantitas[i].x,plantitas[i].y);
+				fueguitos[i].actualizar(plantitas[i]);
+			}
+		}
+
 
 		//DISPAROS DE LAS PLANTAS:
 		if (cont1==200){
@@ -399,11 +401,6 @@ public class Juego extends InterfaceJuego {
 		dibujarPlantas(plantitas);
 		
 		dibujarBolasFuegos(fueguitos);
-		for (int i = 0; i < fueguitos.length; i++) {
-			if (fueguitos[i]!=null){
-				fueguitos[i].mover(fueguitos[i]);
-			}
-		}
 
 		autito.dibujarse(this.entorno);
 		

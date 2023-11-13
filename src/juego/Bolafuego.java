@@ -48,6 +48,19 @@ public class Bolafuego {
 			// Mover el rayo hacia la izquierda
 			x -= 4.5;
 		}
+
+		if (this.x>829) {
+			fueguito = null;
+		}
+		if (this.x<24) {
+			fueguito = null;
+		}
+		if(this.y>582) {
+			fueguito = null;
+		}
+		if(this.y<16) {
+			fueguito = null;
+		}
 	}
 
 	public void actualizar(Planta plantita){
@@ -161,5 +174,4 @@ public class Bolafuego {
 		}
 		return 5;
 	}
-
 }
